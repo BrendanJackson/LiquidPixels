@@ -1,12 +1,14 @@
-<div>
-    Content: TESTING
-</div>
+<script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"
+>
+</script>
+<!--<div>-->
+<!--    Content: TESTING-->
+<!--</div>-->
     <?php
-//    $LiquifireUrl = Mage::getStoreConfig('linkedretail_liquidpixels/settings/liquifire_url');
-//    $product_id = Mage::registry('current_product')->getId();
-//    $storeId = Mage::registry('current_product')->getStoreId();
-//    $liquifireChain = Mage::getResourceModel('catalog/product')->getAttributeRawValue($product_id, 'liquifire_chain', $storeId);
-//    $liquifireEnabled = Mage::getResourceModel('catalog/product')->getAttributeRawValue($product_id, 'liquifire_product_enabled', $storeId);
+
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // Instance of object manager
         $resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
         $connection = $resource->getConnection();
@@ -15,8 +17,8 @@
         $product_attritbute = $resource->getTableName('catalog_product_entity_varchar');
 
         $product = $objectManager->get('Magento\Framework\Registry')->registry('current_product');//get current product
-        echo "<br>product_ID: " . $product->getId();
-        echo "<br>product_Name: " . $product->getName();
+//        echo "<br>product_ID: " . $product->getId();
+//        echo "<br>product_Name: " . $product->getName();
 
 
         $sql = "Select * FROM " . $customizable_options . " WHERE product_id =" . $product->getId();
@@ -28,13 +30,13 @@
             "WHERE entity_id = " . $product->getId() . " AND eav_attribute.attribute_code = 'image_chain' "
         ;
 
-        echo "sql: " . $sql;
+//        echo "sql: " . $sql;
         $image_chain = $connection->fetchAll($sql);
         $image_chain = $image_chain[0]['value'];
 
-        echo "<br><pre>";
-        var_dump($image_chain);
-        echo "</pre>";
+//        echo "<br><pre>";
+//        var_dump($image_chain);
+//        echo "</pre>";
 
 
     ?>
@@ -824,7 +826,7 @@
                 jQuery('#liquifire-preview').click(function(){
                     //jQuery('.mousetrap').addClass('liquidpixels');
                     var liquifireUrl = 'https://urm.liquifire.com/urm';
-                    var liquifireChain = <?= $image_chain ?>;
+                    var liquifireChain = '<?= $image_chain ?>';
                     var imageUrl = liquifireUrl + '?';
                     console.log("liquifireUrl: " + liquifireUrl);
                     console.log("liquifireChain: " + liquifireChain);
