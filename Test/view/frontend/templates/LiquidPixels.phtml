@@ -1,9 +1,12 @@
+<!--
 <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"
 >
 </script>
+-->
+
 <!--<div>-->
 <!--    Content: TESTING-->
 <!--</div>-->
@@ -792,6 +795,8 @@
                 position: fixed;
                 top: 50%;
             }
+
+            #product-attribute-specs-table > tbody{display: none;}
         </style>
 <!--    --><?php //endif; ?>
     <div class="product-options" id="product-options-wrapper">
@@ -803,15 +808,15 @@
 <!--    <script type="text/javascript">decorateGeneric($$('#product-options-wrapper dl'), ['last']);</script>-->
 <!--    --><?php //if($liquifireEnabled): ?>
         <script type="text/javascript">
-            // arguments = {optionId:'options_mcr_cus_text', argument:'lineOne'};
+            // arguments = {optionId:'options_2_text', argument:'lineOne'};
             /*optionId = InputId Of Personalization field*/
 
             var personalizedField = document.getElementsByClassName('product-custom-option')[0].id;
             //!TODO: String/VAR TO ARRAY
-            console.log('personalizedField: ' + personalizedField);
+            // console.log('personalizedField: ' + personalizedField);
 
-            arguments = {optionId: ''+ personalizedField +'' , argument:'<?= $liquifire_argument ?>'};
-            console.log("arguments: " + arguments);
+            arguments = {optionId:personalizedField, argument:'<?= $liquifire_argument ?>'};
+            // console.log("arguments: " + arguments);
             liquifireArguments.push(arguments);
 
             jQuery( document ).ready(function(){
@@ -833,9 +838,9 @@
                     var liquifireUrl = 'https://urm.liquifire.com/urm';
                     var liquifireChain = '<?= $image_chain ?>';
                     var imageUrl = liquifireUrl + '?';
-                    console.log("liquifireUrl: " + liquifireUrl);
-                    console.log("liquifireChain: " + liquifireChain);
-                    console.log("imageUrl: " + imageUrl);
+                    // console.log("liquifireUrl: " + liquifireUrl);
+                    // console.log("liquifireChain: " + liquifireChain);
+                    // console.log("imageUrl: " + imageUrl);
 
                     jQuery.each(liquifireArguments, function(){
                         optionValue = document.getElementById(this.optionId).value;
@@ -861,14 +866,17 @@
 
                     // Zoom Url
                     zoomUrl = imageUrl + '&call=url[file:' + liquifireChain + ']&scale=size[1000]&sink';
-                    console.log('zoomUrl: '+ zoomUrl);
+                    // console.log('zoomUrl: '+ zoomUrl);
 
                     // Add image chain
                     imageUrl += '&call=url[file:' + liquifireChain + ']&scale=size[900]&sink';
-                    console.log('imageUrl: '+ imageUrl);
+                    // console.log('imageUrl: '+ imageUrl);
 
                     var poOptions = { type : 'image' };
                     var popup = new jQuery.Popup(poOptions);
+
+                    // var jQuery.Popup(poOptions);
+
                     popup.open(zoomUrl);
                 });
 
