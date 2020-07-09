@@ -10,22 +10,31 @@
 <!--<div>-->
 <!--    Content: TESTING-->
 <!--</div>-->
-    <?php
+<?php
 
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // Instance of object manager
-        $resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
-        $connection = $resource->getConnection();
-        $customizable_options = $resource->getTableName('catalog_product_option');
-        $attribute_type = $resource->getTableName('eav_attribute');
-        $product_attritbute = $resource->getTableName('catalog_product_entity_varchar');
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // Instance of object manager
+    $resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
+    $connection = $resource->getConnection();
 
-        $product = $objectManager->get('Magento\Framework\Registry')->registry('current_product');//get current product
+
+    $customizable_options = $resource->getTableName('catalog_product_option');
+    $attribute_type = $resource->getTableName('eav_attribute');
+    $product_attritbute = $resource->getTableName('catalog_product_entity_varchar');
+
+    $product = $objectManager->get('Magento\Framework\Registry')->registry('current_product');//get current product
 //        echo "<br>product_ID: " . $product->getId();
 //        echo "<br>product_Name: " . $product->getName();
 
 
-        $sql = "Select * FROM " . $customizable_options . " WHERE product_id =" . $product->getId();
+    $sql = "Select * FROM " . $customizable_options . " WHERE product_id =" . $product->getId();
+
+    if( $connection->fetchAll($sql) ):
         $result = $connection->fetchAll($sql); // gives associated array, table fields as key in array.
+
+
+
+
+
         $liquifire_argument = $result[0]["liquifire_argument"];
 
         $sql = "Select * FROM " . $attribute_type . " LEFT JOIN " . $product_attritbute . " 
@@ -45,6 +54,7 @@
     ?>
 <!--!TODO    --><?php //if($liquifireEnabled): ?>
         <script type="text/javascript">
+        require(['jquery'],function($){
             var liquifireArguments = [];
             /*-------------------------------
                 POPUP.JS
@@ -737,77 +747,12 @@
                 };
 
             }(jQuery, window));
-        </script>
-        <style type="text/css">
-            /*-------------------------------
-                POPUP.CSS
-            -------------------------------*/
 
-            .popup_back {
-                height: 100%;
-                left: 0;
-                position: fixed;
-                top: 0;
-                width: 100%;
-                z-index: 9996;
-            }
 
-            .popup_cont {
-                position: fixed;
-                z-index: 9999;
-            }
 
-            .preloader {
-                z-index: 9997;
-            }
+        ////// !TODO: CUSTOM CODE SPLIT
 
-            /*---------------------
-                EDIT BELOW
-            */
 
-            .popup_close {
-                color: #888;
-                cursor: pointer;
-                position: absolute;
-                padding: 5px;
-                right: 5px;
-                top: 0;
-            }
-
-            .popup_close:hover {
-                color: #111;
-            }
-
-            .popup_back {
-                cursor: pointer;
-                background-color: #222;
-            }
-
-            div.popup {
-                background: #fff;
-                padding: 25px;
-                box-shadow: 0 3px 10px #222;
-            }
-
-            .preloader {
-                left: 50%;
-                margin: -10px 0 0 -25px;
-                position: fixed;
-                top: 50%;
-            }
-
-            #product-attribute-specs-table > tbody{display: none;}
-        </style>
-<!--    --><?php //endif; ?>
-    <div class="product-options" id="product-options-wrapper">
-<!--        --><?php //echo $this->getChildHtml('', true, true);?>
-<!--        --><?php //if ($this->hasRequiredOptions()):?>
-<!--            <p class="required">--><?php //echo $this->__('* Required Fields') ?><!--</p>-->
-<!--        --><?php //endif;?>
-    </div>
-<!--    <script type="text/javascript">decorateGeneric($$('#product-options-wrapper dl'), ['last']);</script>-->
-<!--    --><?php //if($liquifireEnabled): ?>
-        <script type="text/javascript">
             // arguments = {optionId:'options_2_text', argument:'lineOne'};
             /*optionId = InputId Of Personalization field*/
 
@@ -819,7 +764,12 @@
             // console.log("arguments: " + arguments);
             liquifireArguments.push(arguments);
 
-            jQuery( document ).ready(function(){
+
+
+
+
+
+             jQuery( document ).ready(function(){
                 function lpiEncode(str) {
                     var encoded = str;
                     encoded = encoded.replace(/&/g, "U0026amp;");
@@ -882,7 +832,81 @@
 
             });
 
-
+    });
         </script>
-<!--    --><?php //endif; ?>
 
+
+<style type="text/css">
+    /*-------------------------------
+        POPUP.CSS
+    -------------------------------*/
+
+    .popup_back {
+        height: 100%;
+        left: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 9996;
+    }
+
+    .popup_cont {
+        position: fixed;
+        z-index: 9999;
+    }
+
+    .preloader {
+        z-index: 9997;
+    }
+
+    /*---------------------
+        EDIT BELOW
+    */
+
+    .popup_close {
+        color: #888;
+        cursor: pointer;
+        position: absolute;
+        padding: 5px;
+        right: 5px;
+        top: 0;
+    }
+
+    .popup_close:hover {
+        color: #111;
+    }
+
+    .popup_back {
+        cursor: pointer;
+        background-color: #222;
+    }
+
+    div.popup {
+        background: #fff;
+        padding: 25px;
+        box-shadow: 0 3px 10px #222;
+    }
+
+    .preloader {
+        left: 50%;
+        margin: -10px 0 0 -25px;
+        position: fixed;
+        top: 50%;
+    }
+
+
+</style>
+<!--    --><?php //endif; ?>
+<div class="product-options" id="product-options-wrapper">
+    <!--        --><?php //echo $this->getChildHtml('', true, true);?>
+    <!--        --><?php //if ($this->hasRequiredOptions()):?>
+    <!--            <p class="required">--><?php //echo $this->__('* Required Fields') ?><!--</p>-->
+    <!--        --><?php //endif;?>
+</div>
+<!--    <script type="text/javascript">decorateGeneric($$('#product-options-wrapper dl'), ['last']);</script>-->
+<!--    --><?php //if($liquifireEnabled): ?>
+    <?php endif; ?>
+
+<style type="text/css">
+    #product-attribute-specs-table > tbody{display: none;}
+</style>

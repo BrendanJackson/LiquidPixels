@@ -1,0 +1,23 @@
+ul.tabs-horiz.ui-tabs-nav.ui-helper-reset.ui-helper-clearfix.ui-widget-header.ui-corner-all {
+    background-color: #d5d5d5;
+    margin: 0 0 18px 0;
+    padding: 8px 0 0 5px;
+}
+
+.dashboard-item.dashboard-item-primary, table.admin__table-primary {
+    border: 1px solid #d6d6d6;
+}
+
+.dashboard-item-title {
+    background: #6f8992;
+    padding: 2px 10px;
+    color: white;
+}
+
+.dashboard-data span {
+    padding: 4px;
+}
+
+table.admin__table-primary td {
+    padding: 0 4px !important;
+}

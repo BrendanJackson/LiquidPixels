@@ -13,6 +13,13 @@
       <executable />
     </execution>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectId" id="1Xj3M3R3VLcfK7bp8QdhhSE8zAq" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -57,7 +64,7 @@
       <workItem from="1581614353792" duration="10576000" />
       <workItem from="1581711138592" duration="10538000" />
       <workItem from="1581963385842" duration="674000" />
-      <workItem from="1581964125340" duration="29197000" />
+      <workItem from="1581964125340" duration="36863000" />
     </task>
     <servers />
   </component>
